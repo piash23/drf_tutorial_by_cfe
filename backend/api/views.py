@@ -7,9 +7,9 @@ def api_home(request):
     model_data = Product.objects.all().order_by('?').first()
     data = {}
     if model_data:
-        data['id'] = model_data.id
-        data['title'] = model_data.title
-        data['content'] = model_data.content
-        data['price'] = model_data.price
+        data = model_to_dict(model_data, fields=['title', 'content', 'price'])
+
     print(data)
     return JsonResponse(data)
+    # json_data_str = json.dumps(data)
+    # return HttpResponse(json_data_str, headers={'Content-Type': 'application/json'})
